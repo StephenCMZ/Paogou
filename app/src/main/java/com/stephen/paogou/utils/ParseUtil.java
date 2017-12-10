@@ -51,13 +51,15 @@ public class ParseUtil {
             return null;
         }
 
-        Pattern pattern = Pattern.compile("src=\"http://www.tkcp010.cc/upload/images/\\d{10}.jpg\" style=\"width: \\d{3}px; height: \\d{3}px;\"");
+//        Pattern pattern = Pattern.compile("src=\"http://www.tkcp010.cc/upload/images/\\d{10}.jpg\" style=\"width: \\d{3}px; height: \\d{3}px;\"");
+//        Pattern pattern = Pattern.compile("src=\"https://www.niuwa010.cc/upload/images/\\d{10}.jpg\"");
+        Pattern pattern = Pattern.compile("src=\"(http|https)://(?!(\\.jpg|\\.png)).+?(\\.jpg|\\.png)\"");
         Matcher matcher = pattern.matcher(string);
 
         if (matcher.find()){
             String src = matcher.group(0);
             if (!StringUtil.isEmpty(src)){
-                Pattern patternUrl = Pattern.compile("http://www.tkcp010.cc/upload/images/\\d{10}.jpg");
+                Pattern patternUrl = Pattern.compile("(http|https)://(?!(\\.jpg|\\.png)).+?(\\.jpg|\\.png)");
                 Matcher matcherUrl = patternUrl.matcher(src);
                 if (matcherUrl.find()){
                     return matcherUrl.group(0);
